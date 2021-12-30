@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>管理员入口</title>
+        <link rel="stylesheet" type="text/css" href="/public/login.css">
+
+    </head>
+<body>
+    <div >
+        <ol id="navbar">
+            <li id="home" class="page">主页</li>
+            <li id="AboutUs">关于系统</li>
+            <li id="reg" class="page">注册</li>
+        </ol>
+    </div>
+    <h2>管理员入口</h2><br>
+    <div class="login">
+       <p id="msg"><%= msg%></p> 
+        <form id="login" method="post" action="admin.html">
+        <label><b>姓名
+        </b>
+    </label>
+    
+    <input type="text" name="useremail" id="Uname" placeholder="Admin...">
+    <br><br>
+        <label><b>密码
+        </b>
+    </label>
+    <input type="Password" name="pass" id="Pass" placeholder="Password">
+        <br><br>
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <input  type="submit"  id="log" value="Log In Here">
+        <br><br>
+        
+        <input type="checkbox" id="check">
+        <span>记住密码</span>
+        <br>
+        <a class="my-button" title="Relevant Title" href="login.ejs">SignIn</a><a class="my-button" title="Relevant Title" href="register.ejs">Sign Up</a>
+            <br><br>
+        
+       
+        <!-- <a href="./register.ejs">register</a>  -->
+    </form>
+    <script src="admin.js"></script>
+</div>
+</body>
+</html>
