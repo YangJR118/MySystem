@@ -5,13 +5,9 @@ const { type } = require("os");
 const { string } = require("prop-types");
 const app=express();
 
-//connect to db
-// const db= mongoose.connect('root:root@mongodb://localhost/testlibrary?authSource=admin',{useNewUrlParser: true,useUnifiedTopology: true},()=>{
-//     console.log("connected to database")
-// })
-const db=mongoose.connect('mongodb://localhost/btest');
-// creating schema
-
+//连接数据库
+const db=mongoose.connect('mongodb://172.21.2.236:27017/190110890317');
+// 创建schema
 const schema = new mongoose.Schema({ name: 'string', size: 'string' });
 var Tank1 = mongoose.model('Tank', schema);
 var t1=mongoose.model("t1",schema)
@@ -29,9 +25,4 @@ u2.save()
 
 
 
-
-// app.get("/",(req,res,next)=>{
-//     res.send("listning")
-// })
-
-app.listen(8080,console.log("listening"));
+app.listen(50317,console.log("listening"));

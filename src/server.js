@@ -1,62 +1,41 @@
-// importing an express module
+// 引进相关包
 const mongoose=require("mongoose")
-//const store=require("store")(session)
 const express=require("express");
 const { number } = require("prop-types");
 
-// importing express-session
+// 引进 express-session
 var session=require("express-session");
 var cookieParser=require("cookie-parser");
 
 // storing session into db
 var MongoSession = require("connect-mongodb-session")(session);
 
-
-
-
 // importing bcrypt for hashing the password
 const bcrypt=require("bcrypt");
 
-// initiating an express object
-
 const app =express();
-const port=process.env.PORT || 8080;
-// useremail=[{user: "vika@jsj",pass:"jdsnj"}]
+const port=process.env.PORT || 50317;//端口号
 
-// importing mongoose
-// const mongoose=require("mongoose");
+//连接数据库
+var db=mongoose.connect('mongodb://172.21.2.236:27017/190110890317');
 
-//connecting to the database
-var db=mongoose.connect('mongodb://localhost/btest');
-
-
-//creating registered Schema
-
-// var schema =mongoose.Schema({
-    
-//     username:String,
-//     useremail:String,
-//     password:String
-    
-// })
+//创建Schema
 var schema =mongoose.Schema({
     
     firstname:String,
     lastName:String,
     gender:String,
-    country:String,
+    city:String,
     mobile:String,
     useremail:String,
     password:String
     
 })
 
-
-
-// converting a schema into a model
+// 创建表
 var register=mongoose.model("Register",schema);
 
-
+//创建模型
 var schema1 =mongoose.Schema({
     title:String,
     author:String,
@@ -64,42 +43,36 @@ var schema1 =mongoose.Schema({
     link:String
 
 })
-
+//创建表
 var books=mongoose.model("books",schema1);
 
-// admin page schema
+//创建模型
 var adminschema=mongoose.Schema({
     useremail:String,
     password:String
 })
-
+//创建表
 var adminmod=mongoose.model("Admin",adminschema)
+//管理员账号
 var admin1=new adminmod({useremail:"123",password:"1234"})
 admin1.save()
 
 //fetching or excessing form 
 app.use(express.urlencoded({extended:false})) 
 
-// routing 
-
-// set template engine "ejs"
+// 路由 
+//设置模板引擎 "ejs"
 app.set("view engine","ejs");
 
-//adding style to ejs file by first creating a public folder and then making it static
-
+//在ejs文件中添加样式，首先创建一个公共文件夹，然后使其成为静态文件夹
 app.use(express.static("public"))
 
-// app.get("./views/libraryuser.ejs",(req,res)=>{
-//     res.render("./views/libraryuser.ejs")
-// })
-
-// app.use(cookieParser())
 app.use(session({
     key:"user_email",
     secret:"secerts",
     resave:false,
     saveUninitialized:false,
-    //Memstore:store,
+    //store:store,
     cookie:{
         maxAge:60000
     }
@@ -148,12 +121,9 @@ app.get("/libraryuser.ejs",isAuthAdmin,(req,res)=>{
         }   
     })
 
-
-    // res.render("libraryuser.ejs")
-    // res.render("libraryuser.ejs",{datas:data})
 })
 
-//admin page
+//管理员界面
 app.get("/admin.ejs",(req,res)=>{
     
     res.render('admin.ejs')
@@ -164,7 +134,7 @@ app.get("/register.ejs",(req,res)=>{
     res.render('register.ejs')
 })
 
-// userlibrary page
+// userlibrary界面
 app.get("/userlibrary.ejs",isAuthUser,(req,res)=>{
     books.find({},(err,data)=>{
         if (err){
@@ -202,8 +172,7 @@ app.post("/login.ejs", async (req,res)=>{
             req.session.isAuthUser=true;
             req.session.isAuth=false
            
-            // res.render('libraryuser.ejs')
-            // res.render("login.ejs")
+
             books.find({},(err,data)=>{
                 if (err){
                     console.log(err)
@@ -261,17 +230,7 @@ app.post("/admin.ejs", async (req,res)=>{
             req.session.isAuthUser=false;
             
            
-            // res.render('libraryuser.ejs')
-            // res.render("login.ejs")
-            // books.find({},(err,data)=>{
-            //     if (err){
-            //         console.log(err)
-            //     }
-            //     else{
-            //         console.log(data)
-            //         res.render("libraryuser.ejs",{datas:data})
-            //     }   
-            // })
+           
             res.redirect("libraryuser.ejs")
 
        }
@@ -297,11 +256,11 @@ app.post("/admin.ejs", async (req,res)=>{
 })
 
 
-// console.log(regester.length);
+
 app.post("/register.ejs",async (req,res)=>{
     console.log("reg")
 
-    //checking is the email address already exists in data base
+    
     const newUser= await register.findOne({useremail:req.body.useremail}).catch((err)=>{
         
     }) 
@@ -317,13 +276,12 @@ app.post("/register.ejs",async (req,res)=>{
         try{
 
             let password1=await bcrypt.hash(req.body.pass1,10)
-            // useremail.push({ username:req.body.username, user:req.body.useremail ,pass:password})
-            // console.log(useremail)
+           
             let user1=new register({
                 firstname:req.body.fname,
     lastName:req.body.lname,
     gender:req.body.gender,
-    country:req.body.country,
+    city:req.body.city,
     mobile:req.body.mobile,
     useremail:req.body.useremail ,
     password:password1
@@ -392,7 +350,6 @@ app.post("/libraryuser.ejs",async (req,res)=>{
 // deleteing particular record from the book
 app.get("/delete/:id", (req,res)=>{
     let id=req.params.id;
-    // let deleteData= books.findOne({_id:id}).catch(()=>{})
     try{
 
         books.deleteOne({_id:id}).then(()=>{
@@ -405,7 +362,6 @@ app.get("/delete/:id", (req,res)=>{
         
     }
     catch{
-        //jgxhsg
     }
     
 })

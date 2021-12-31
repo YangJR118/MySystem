@@ -89,13 +89,7 @@ div #display{
     /* justify-content: space-evenly; */
     
 }
-/* .th{
-    flex-direction: row;
-    margin: 1px;
-    padding-right :200px;
-    padding-left: 80px;
-    justify-content: space-evenly;
-} */
+
 .th{
     flex-direction: row;
     margin: 1px;
