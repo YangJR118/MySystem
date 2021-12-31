@@ -44,7 +44,7 @@
                     <th class="th">书名</th>
                     <th class="th">作者</th>
                     <th class="th">ISBN</th>
-                    <th class="th">书籍链接</th>
+                    <th class="th">书籍地址</th>
                     
                 </tr>
                 <% if(datas!=null) { %>
@@ -53,7 +53,8 @@
                             <td class="td"><%= item.title%></td>
                             <td class="td"><%= item.author %></td>
                             <td class="td"><%= item.isbn%></td>
-                            <td class="td"><a id="downld" href="<%= item.link %>">下载</a></td>    
+                            <td class="td"><%= item.link %></td>
+                            <!-- <td class="td"><a id="downld" href="<%= item.link %>">下载</a></td>     -->
                             
                         </tr>
                     <% }) %>    

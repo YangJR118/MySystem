@@ -35,4 +35,9 @@ home.addEventListener("click",()=>{
     console.log("clicked")
     window.location.href="/"
 })
+const about=document.getElementById('About')
+about.addEventListener("click",()=>{
+    console.log("clicked")
+    window.location.href="about.ejs"
+})
 

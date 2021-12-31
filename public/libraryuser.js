@@ -93,7 +93,7 @@ function addbook(e) {
             td4.className = 'td';
             let anchor=document.createElement("a");
             anchor.href.value=a[3];
-            anchor.appendChild(document.createTextNode("download"))
+            //anchor.appendChild(document.createTextNode("download"))
             td4.appendChild(anchor)
             tr.appendChild(td4)
 
