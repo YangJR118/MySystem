@@ -1,10 +1,42 @@
 # 图书馆管理系统说明
 
+[TOC]
+
 ## 1 项目设计部分
 
 ### 1.1 项目总体构成
 
 使用了express+mongodb+node.js，这是一个简单的图书管理系统，进行了简单的页面设计，实现了基础的登陆注册功能，图书的添加和查询功能。
+
+数据库设计如下：
+
+（1）register注册表
+
+| 字段名称  | 数据类型 |     中文说明     |
+| :-------: | :------: | :--------------: |
+| firstname |  String  |        姓        |
+| lastName  |  String  |        名        |
+|  gender   |  String  |       性别       |
+|   city    |  String  |      所在地      |
+|  mobile   |  String  |      手机号      |
+| useremail |  String  | 邮箱（登陆账号） |
+| password  |  String  |       密码       |
+
+（2）book书表
+
+| 字段名称 | 数据类型 | 中文说明 |
+| :------: | :------: | :------: |
+|  title   |  String  |   书名   |
+|  author  |  String  |   作者   |
+|   isbn   |  Number  |  ISBN号  |
+|   link   |  String  |  藏书地  |
+
+（3）admin管理员表
+
+| 字段名称  | 数据类型 |     中文说明     |
+| :-------: | :------: | :--------------: |
+| useremail |  String  | 邮箱（登陆账号） |
+| password  |  String  |       密码       |
 
 ### 1.2 引入的包在项目中的作用相关说明
 
@@ -114,4 +146,6 @@ views：页面文件
 
 第五次提交：完善功能，并进行测试;
 
-第六次提交：测试成功
+第六次提交：测试成功；
+
+第七次提交：完成了README.me的撰写
