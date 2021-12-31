@@ -17,7 +17,8 @@ const app =express();
 const port=process.env.PORT || 50317;//端口号
 
 //连接数据库
-var db=mongoose.connect('mongodb://172.21.2.236:27017/190110890317');
+var db=mongoose.connect('mongodb://localhost/aaatest');
+//var db=mongoose.connect('mongodb://172.21.2.236:27017/190110890317');
 
 //创建Schema
 var schema =mongoose.Schema({
@@ -35,6 +36,8 @@ var schema =mongoose.Schema({
 // 创建表
 var register=mongoose.model("Register",schema);
 
+
+
 //创建模型
 var schema1 =mongoose.Schema({
     title:String,
@@ -46,6 +49,33 @@ var schema1 =mongoose.Schema({
 //创建表
 var books=mongoose.model("books",schema1);
 
+//插入测试数据1
+var b1=new books(
+    {title:"围城",author:"沈从文",isbn:1111111,link:"文学A-1"}
+)
+b1.save()
+//插入测试数据2
+var b2=new books(
+    {title:"狂人日记",author:"鲁迅",isbn:1112111,link:"文学A-2"}
+)
+b2.save()
+//插入测试数据3
+var b3=new books(
+    {title:"计算机网络",author:"谢希仁",isbn:1331111,link:"计算机A-1"}
+)
+b3.save()
+//插入测试数据4
+var b4=new books(
+    {title:"红楼梦",author:"曹雪芹",isbn:1111222,link:"文学B-1"}
+)
+b4.save()
+//插入测试数据5
+var b5=new books(
+    {title:"西游记",author:"吴承恩",isbn:11331222,link:"文学B-2"}
+)
+b5.save()
+
+
 //创建模型
 var adminschema=mongoose.Schema({
     useremail:String,
@@ -53,9 +83,12 @@ var adminschema=mongoose.Schema({
 })
 //创建表
 var adminmod=mongoose.model("Admin",adminschema)
-//管理员账号
+//管理员账号1
 var admin1=new adminmod({useremail:"123",password:"1234"})
 admin1.save()
+//管理员账号2
+var admin2=new adminmod({useremail:"yjr",password:"yjr"})
+admin2.save()
 
 //fetching or excessing form 
 app.use(express.urlencoded({extended:false})) 
